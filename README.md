@@ -27,7 +27,8 @@ Deep learning:
 In each model training, hyperparameter tuning is done in order to get the best Silhouette score.<br>
 
 **Evaluation**<br>
-Silhouette score is used as our evaluation metrics, with the best model has the highest Silhouette score. However, good clustering in the case of stock market regime detection should mean adjacent time steps stay in the same cluster/regime (implying that regime should be smooth, without changing frequently). Silhouette score may not directly measure how predicted regime time series is smooth or not.<br>
+Silhouette score is used as our evaluation metrics, as it relies only on cluster assignments and distance between samples, without true labels. <br>
+However, good clustering in the case of stock market regime detection should mean adjacent time steps stay in the same cluster/regime (implying that regime should be smooth, without changing frequently). Silhouette score may not directly measure how predicted regime time series is smooth or not.<br>
 <br>
 <br>
 

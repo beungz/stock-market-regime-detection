@@ -273,6 +273,7 @@ def LSTMAutoencoder_GMM_regime_detection(X_scaled, n_components, n_features):
     '''Training model using LSTM Autoencoder + Gaussian Mixture model, and hyperparameter tuning, 
         then return the best model, predicted market regime labels, together with the best Silhouette score'''
     
+    # Define the list of hyperparameters
     param_grid = {
         'window_size' : [30],
         'n_features' : [n_features],
@@ -296,12 +297,14 @@ def LSTMAutoencoder_GMM_regime_detection(X_scaled, n_components, n_features):
     best_score = 0
     best_params = None
 
+
     for i, params in enumerate(param_combos):
         print(f"\n[{i+1}/{len(param_combos)}] Trying params: {params}")
         
         # Instantiate model with current params
         model = LSTMAutoencoder_GMM(**params)
         
+        # Fit the model to the training set
         model.fit(X_scaled)
         current_score = model.score
 
@@ -322,6 +325,7 @@ def LSTMAutoencoder_GMM_regime_detection(X_scaled, n_components, n_features):
     print('\nSilhouette Score for each combination of parameters')
     print(df_results)
 
+    # The optimal parameters and score
     print(f'\nBest Parameter: {best_params}')
     print(f'Best Silhouette Score: {best_score:.4f}')
 
