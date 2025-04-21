@@ -273,20 +273,19 @@ def LSTMAutoencoder_GMM_regime_detection(X_scaled, n_components, n_features):
     '''Training model using LSTM Autoencoder + Gaussian Mixture model, and hyperparameter tuning, 
         then return the best model, predicted market regime labels, together with the best Silhouette score'''
     
-    # Define the list of hyperparameters
     param_grid = {
         'window_size' : [30],
         'n_features' : [n_features],
         # Parameter for LSTM Autoencoder
-        'lstm_units': [64],
-        'latent_dim': [16],
-        'batch_size': [32],
+        'lstm_units': [32, 64],
+        'latent_dim': [8, 16],
+        'batch_size': [16, 32],
         'epochs': [30],
         # Parameter for GaussianMixture
-        'gmm_components': [n_components],                  # number of market regimes
-        'init_params': ['kmeans'],              
-        'covariance_type': ['full', 'diag'],    
-        'reg_covar': [1e-6]                    
+        'gmm_components': [n_components],
+        'init_params': ['kmeans'],
+        'covariance_type': ['full', 'diag', 'tied'],
+        'reg_covar': [1e-6, 1e-4, 1e-2]
     }
 
     keys = param_grid.keys()
